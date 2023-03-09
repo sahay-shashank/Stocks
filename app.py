@@ -9,12 +9,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def rendering():
-    return render_template('form.html')
+    return render_template('plot.html')
     
-@app.route('/plot',methods=['POST'])
+@app.route('/plotgraph',methods=['POST'])
 def plot():
-    data = request.get_json()
-    result = json.loads(data)
+    result = request.get_json()
     print(result)
     # takes ticker to get stock data
     t = yf.Ticker(result['ticker'])
@@ -26,11 +25,10 @@ def plot():
                             spikemode="toaxis+across", spikethickness=1, spikecolor="red")
     ))
     # plots in a graph
-    fig.write_html("plot_frame.html")
-    # plot_json = fig.to_json()
+    # fig.write_html("plot_frame.html")
+    plot_json = fig.to_json()
     # print(plot_json)
     print('Done')
-    fig.show()
-    return render_template('plot.html')
+    return plot_json
 if __name__=='__main__':
     app.run(debug=True)
