@@ -1,148 +1,207 @@
 <html>
-    <head>
-        <title>Stock Tracking</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <section id="navbar">
+  <head>
+    <title>Stock Tracking</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <section id="navbar">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"
+          ><img src="{{ url_for('static', filename='assets/logo.jpg') }}"
+        /></a>
+        <!-- Nanbar Toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#banner">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#faq">FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
 
+    <section id="search">
+      <center>
+        <div class="bar">
+          <input
+            class="searchbar"
+            type="text"
+            title="Search"
+            placeholder="Search companies..."
+            id="search_bar"
+          />
+        </div>
+        <div class="buttons">
+          <button class="button" type="button" onclick="getsearch()">
+            Search
+          </button>
+        </div>
+      </center>
+    </section>
 
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="assets/logo.jpg"></a>
-                <!-- Nanbar Toggler -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#banner">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">ABOUT US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#faq">FAQ</a>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
+    <!-- Banner  -->
+    <section id="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="promo-title">DISCOVER & INVEST</p>
+            <p>
+              Best place to monitor companies and visualize the investments to
+              be done in the same.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="{{ url_for('static', filename='assets/graph.jpg') }}"
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-6">
+            <p class="promo-title">BUILT-IN ANALYTICS</p>
+            <p>
+              Track your investments using graphs whivh are generated using
+              built-in analytics in our application which helps you to make an
+              informed decision based on the performance of a company in the
+              past or present, track company portfolios, and plan their
+              investment stratergies effectively.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="{{ url_for('static', filename='assets/chart.jpg') }}"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
 
+      <!-- <IMG SRC="assets/search.jpg" class="bottom-img"> -->
+    </section>
 
-        </section>
+    <!-- About -->
+    <section id="about">
+      <div class="container text-center">
+        <h1 class="title">ABOUT US</h1>
+        <div class="row text-center">
+          <div class="col-md-4 about">
+            <img
+              src="{{ url_for('static', filename='assets/about1.jpg') }}"
+              class="about-img"
+            />
+            <h4>MISSION</h4>
+            <p>
+              Our mission is to simplify financial decisions and information to
+              give readers the confidence to manage every aspect of their
+              financial life.
+            </p>
+          </div>
+          <div class="col-md-4 about">
+            <img
+              src="{{ url_for('static', filename='assets/about2.jpg') }}"
+              class="about-img"
+            />
+            <h4>VISION</h4>
+            <p>
+              Our vision is to serve people better, to always be relevant in
+              their lives, and to form lifelong relationships.
+            </p>
+          </div>
+          <div class="col-md-4 about">
+            <img
+              src="{{ url_for('static', filename='assets/about3.jpg') }}"
+              class="about-img"
+            />
+            <h4>OBJECTIVE</h4>
+            <p>
+              We are dedicated to improve the financial decisions made by a
+              person by providing free and unbiased access to stock market
+              regularly.
+            </p>
+          </div>
+        </div>
+        <!-- <button type="button" class="btn btn-primary"></button> Will be used in Search section.-->
+      </div>
+    </section>
 
+    <!-- FAQ -->
+    <section id="faq">
+      <div clas="container">
+        <h1 class="title text-center">FAQ</h1>
+        <div class="row">
+          <div class="col-md-6 faq">
+            <p class="faq-title">All your questions answered here.</p>
+            <ul>
+              <li href="#">What service do we provide?</li>
+              <li href="#">How to access our services?</li>
+              <li href="#">What API do we use?</li>
+              <li href="#">What are the advantages of using our service?</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="{{ url_for('static', filename='assets/faq.jpg') }}"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="search">
-
-            <center>
-            <div class="bar">
-                <input class="searchbar" type="text" title="Search" placeholder="Search companies...">
-            </div>
-            <div class="buttons">
-                <button class="button" type="button">Search</button>
-            </div>
-            </center>
-
-
-        </section>
-
-
-        <!-- Banner  -->
-        <section id="banner">
-
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="promo-title">DISCOVER & INVEST</p>
-                        <P>Best place to monitor companies and visualize the investments to be done in the same.</P>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="assets/graph.jpg" class="img-fluid">
-                    </div>
-                    <div class="col-md-6">
-                        <p class="promo-title">BUILT-IN ANALYTICS</p>
-                        <P>Track your investments using graphs whivh are generated using built-in analytics in our application which helps you to make an informed decision based on the performance of a company in the past or present, track company portfolios, and plan their investment stratergies effectively.</P>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="assets/chart.jpg" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-
-                <!-- <IMG SRC="assets/search.jpg" class="bottom-img"> -->
-                    
-
-        </section>
-
-        <!-- About -->
-        <section id="about">
-
-
-            <div class="container text-center">
-                <h1 class="title">ABOUT US</h1>
-                <div class="row text-center">
-                    <div class="col-md-4 about">
-                        <img src="assets/about1.jpg" class="about-img">
-                        <h4>MISSION</h4>
-                        <P>Our mission is to simplify financial decisions and information to give readers the confidence to manage every aspect of their financial life.</P>
-                    </div>
-                    <div class="col-md-4 about">
-                        <img src="assets/about2.jpg" class="about-img">
-                        <h4>VISION</h4>
-                        <P>Our vision is to serve people better, to always be relevant in their lives, and to form lifelong relationships.</P>
-                    </div>
-                    <div class="col-md-4 about">
-                        <img src="assets/about3.jpg" class="about-img">
-                        <h4>OBJECTIVE</h4>
-                        <P>We are dedicated to improve the financial decisions made by a person by providing free and unbiased access to stock market regularly.</P>
-                    </div>
-                </div>
-                <!-- <button type="button" class="btn btn-primary"></button> Will be used in Search section.-->
-            </div>
-
-
-        </section>
-
-
-        <!-- FAQ -->
-        <section id="faq">
-
-
-            <div clas="container">
-                <h1 class="title text-center">FAQ</h1>
-                <div class="row">
-                    <div class="col-md-6 faq">
-                        <p class="faq-title">All your questions answered here.</p>
-                        <ul>
-                            <li href="#">What service do we provide?</li>
-                            <li href="#">How to access our services?</li>
-                            <li href="#">What API do we use?</li>
-                            <li href="#">What are the advantages of using our service?</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="assets/faq.jpg" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-
-
-        </section>
-
-
-        <!-- Smooth scroll -->
-            <script src="smooth-scroll.js"></script>
-            <script>
-                var scroll = new SmoothScroll('a[href*="#"]');
-            </script>
-
-
-    </body>
+    <!-- Smooth scroll -->
+    <script src="{{ url_for('static', filename='smooth-scroll.js') }}"></script>
+    <script>
+      var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
+    <script>
+      async function getsearch() {
+        var company = document.getElementById("search_bar").value;
+        var company_name = { company: company };
+        fetch("/getticker", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(company_name),
+        })
+          .then((response) => response.json())
+          .then((message) => {
+              window.location.href = "{{url_for('graph')}}" + "?ticker="+ message["ticker"] +"&name=" + company.toUpperCase();
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
 </html>

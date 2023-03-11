@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import numpy as np
 import json
-from flask import Flask, request, render_template, redirect
-app = Flask(__name__)
+import csv
+
+from flask import Flask, request, render_template, redirect, url_for
+app = Flask(__name__, static_url_path="/static")
 
 
 @app.route('/')
 def rendering():
-    return render_template('plot.html')
+    return render_template('index.html')
 
 
 @app.route('/plotgraph', methods=['POST'])
@@ -38,6 +40,21 @@ def plot():
     return {'profile': json.dumps(company.summary_profile), 'result_plot': plot_json}
     # return plot_json
 
+@app.route('/getticker',methods = ["POST"])
+def getticker():
+    company = request.get_json()["company"].lower()
+    with open('constituents.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        data = {row['Name'].lower(): row['Symbol'] for row in reader}
+    print(data.get(company))
+    ticker = data.get(company)
+    return json.dumps({'ticker':ticker})
+
+@app.route('/graph')
+def graph():
+    ticker = request.args.get("ticker")
+    name = request.args.get('name')
+    return render_template('graph.html',ticker_graph = ticker, name = name)
 
 if __name__ == '__main__':
     app.run(debug=True)

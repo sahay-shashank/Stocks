@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
     <title>Stock App graph</title>
-    <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
+   
   </head>
   <body>
     Ticker: <input type="text" id="ticker" /><br />
@@ -15,29 +15,6 @@
     <div id="plot"></div>
   </body>
   <script>
-    function func1() {
-      ticker = document.getElementById("ticker").value;
-      period = document.getElementById("period").value;
-      interval = document.getElementById("interval").value;
-      option = document.getElementById("option").value;
-      const data = { ticker, period, interval, option };
-      fetch("/plotgraph", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((jsonData) => {
-          if (jsonData["result"] == 0)
-            document.getElementById("info").innerHTML = "Data Not Found";
-          else {
-            plot_data = JSON.parse(jsonData["result_plot"]);
-            profile_data = JSON.parse(jsonData["profile"]);
-            Plotly.newPlot("plot", plot_data.data, plot_data.layout);
-          }
-        })
-        // )
-        .catch((error) => console.error("Error sending data:", error));
-    }
+    
   </script>
 </html>
