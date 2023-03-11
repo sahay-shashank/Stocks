@@ -1,34 +1,43 @@
 # Yahoo Finance is used to gather real-time and historical stocks data from Yahoo
-import yfinance as yf
+import yahooquery as yf
 # matplotlib is used to plot the data in a graph
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+import numpy as np
 import json
-from flask import Flask, request , render_template, redirect
+from flask import Flask, request, render_template, redirect
 app = Flask(__name__)
+
 
 @app.route('/')
 def rendering():
     return render_template('plot.html')
-    
-@app.route('/plotgraph',methods=['POST'])
+
+
+@app.route('/plotgraph', methods=['POST'])
 def plot():
     result = request.get_json()
     print(result)
     # takes ticker to get stock data
-    t = yf.Ticker(result['ticker'])
+    company = yf.Ticker(result['ticker'], country="India")
     # gets the history for the ticker
-    thist = t.history(result['period'], result['interval'])
-    items = thist[result['option']]
-    fig = go.Figure(data=[go.Scatter(x=items.index, y=items.values)], layout=go.Layout(
+    stock_history = company.history(result['period'], result['interval'])
+    if (stock_history.empty):
+        print("Not available")
+        return {'result': 0}
+    values_of_option = stock_history[result['option'].lower()]
+    fig = go.Figure(data=[go.Scatter(x=values_of_option.index.get_level_values("date"), y=values_of_option.values)], layout=go.Layout(
         xaxis=go.layout.XAxis(showline=True, showspikes=True, spikedash="solid",
-                            spikemode="toaxis+across", spikethickness=1, spikecolor="red")
+                              spikemode="toaxis+across", spikethickness=1, spikecolor="red"),
+        yaxis=go.layout.YAxis(
+            title=company.summary_detail[result['ticker']]['currency'])  # type: ignore
     ))
     # plots in a graph
-    # fig.write_html("plot_frame.html")
     plot_json = fig.to_json()
-    # print(plot_json)
-    print('Done')
-    return plot_json
-if __name__=='__main__':
+    print()
+    return {'profile': json.dumps(company.summary_profile), 'result_plot': plot_json}
+    # return plot_json
+
+
+if __name__ == '__main__':
     app.run(debug=True)
