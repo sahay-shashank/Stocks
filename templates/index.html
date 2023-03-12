@@ -24,7 +24,7 @@
     <section id="navbar">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="/"
           ><img src="{{ url_for('static', filename='assets/logo.jpg') }}"
         /></a>
         <!-- Nanbar Toggler -->
@@ -210,6 +210,9 @@
                 "&name=" +
                 company.toUpperCase() +
                 "&interval=1m&period=1d&option=close";
+                else{
+              alert("Data not found. Please check if the company name entered is correct or is missing some keywords like Inc. or Ltd.");
+                }
           })
           .catch((error) => console.error(error));
       }

@@ -27,7 +27,7 @@
     <section id="navbar">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="/"
           ><img src="{{ url_for('static', filename='assets/logo.jpg') }}"
         /></a>
         <!-- Nanbar Toggler -->
@@ -253,19 +253,19 @@
     <section>
       <div id="data">
         <div id="info">
-          <h4>Company Name:</h4>
+          <h2>Company Name:</h2>
           <div id="comp_name"></div>
-          <h4>Country:</h4>
+          <h2>Country:</h2>
           <div id="comp_count"></div>
-          <h4>Company Website:</h4>
+          <h2>Company Website:</h2>
           <div id="comp_web"></div>
-          <h4>Industry:</h4>
+          <h2>Industry:</h2>
           <div id="comp_indus"></div>
         </div>
         <div id="plot"></div>
       </div>
       <div id="summary">
-        <h4>Company Summary:</h4>
+        <h2>Company Summary:</h2>
         <div id="comp_sum"></div>
       </div>
     </section>
@@ -333,8 +333,7 @@
           .then((jsonData) => {
             if (jsonData["result"] == 0)
               alert(
-                "Data not found. Might be that the company is invalid or is missing some keywords like Inc. or Ltd."
-              );
+                "Data not found. Please check if the company name entered is correct or is missing some keywords like Inc. or Ltd.");
             else {
               plot_data = JSON.parse(jsonData["result_plot"]);
               profile_data = JSON.parse(jsonData["profile"])[ticker];
