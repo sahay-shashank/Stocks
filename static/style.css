@@ -1,63 +1,74 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     font-family: 'poppins', sans-serif;
     background-image: linear-gradient(275deg, #434343 0%, black 100%);
 }
-#nav-bar{
+
+#nav-bar {
     position: sticky;
     top: 0;
     z-index: 10;
 }
-.navbar{
+
+.navbar {
     background-image: linear-gradient(to right, #000, #5f1782, #000);
     padding: 0 !important;
 }
-.navbar-brand img{
+
+.navbar-brand img {
     height: 40px;
     margin: 0 15px;
     padding-left: 20px;
 }
-.navbar-nav li{
+
+.navbar-nav li {
     padding: 0 10px;
     margin: 0 10px;
 }
-.navbar-nav li a{
+
+.navbar-nav li a {
     color: #fff !important;
     font-weight: 600;
     float: right;
     text-align: right;
     margin: 0 15px;
 }
-.fa-bars{
+
+.fa-bars {
     color: #fff;
     margin: 0 15px;
     font-size: 30px !important;
 }
-.navbar-toggler{
+
+.navbar-toggler {
     outline: none !important;
 }
 
 /*---- Banner Section ----*/
-#banner{
+#banner {
     background-image: linear-gradient(to right, #5f1782, #000);
     color: #fff;
     padding-top: 5%;
 }
-.promo-title{
+
+.promo-title {
     font-size: 40px;
     font-weight: 600;
     margin-top: 30px;
 }
-.img-fluid{
+
+.img-fluid {
     width: 300px;
     margin-top: 10px;
     margin-left: 40%;
     margin-bottom: 40px;
     border-radius: 15px;
 }
+
 /* .bottom-img{ 
     width: 100%;
 } */
@@ -68,6 +79,7 @@ body{
     width: 600px;
     border: 1px #c8c8c8;
 }
+
 /* .bar:hover {
     box-shadow: 1px 1px 8px 1px #707070;
 } */
@@ -84,21 +96,26 @@ body{
     outline: none;
     border-radius: 80px;
 }
-.button-small{
+
+.button-small {
     color: #fff;
     margin: 5px;
 }
-.button-small-title{
+
+.button-small-title {
     color: #fff;
     margin: 20px;
 }
-.searchbar:focus-within{
+
+.searchbar:focus-within {
     box-shadow: 1px 1px 8px 1px #707070;
 }
+
 .buttons {
     margin-top: 15px;
     margin-bottom: 20px;
 }
+
 .button {
     background-image: linear-gradient(225deg, #090909, #000);
     border: none;
@@ -109,35 +126,41 @@ body{
     border-radius: 20px;
     outline: none;
 }
+
 .button:hover {
     border: 1px solid #707070;
     padding: 10px 20px;
     color: #fff;
 }
+
 .button:focus {
     border: 1px solid #707070;
     padding: 9px 19px;
 }
 
 /*---- About Section ----*/
-#about{
+#about {
     padding: 60px;
     background-image: linear-gradient(225deg, #434343 0%, black 100%);
     color: #fff;
 }
-.about-img{
+
+.about-img {
     width: 160px;
     margin-top: 20px;
 }
-.about{
+
+.about {
     padding: 20px;
 }
-.about h4{
+
+.about h4 {
     padding: 5px;
     margin-top: 20px;
     text-transform: uppercase;
 }
-.title::before{
+
+.title::before {
     content: '';
     background-color: #7b1798;
     height: 5px;
@@ -148,7 +171,8 @@ body{
     text-decoration: underline;
     transform: translateY(63px);
 }
-.title::after{
+
+.title::after {
     content: '';
     background-color: #7b1798;
     height: 10px;
@@ -162,19 +186,21 @@ body{
 }
 
 /*---- FAQ Section ---- */
-#faq{
+#faq {
     background-image: linear-gradient(to left, #5f1782, #000);
     padding-bottom: 50px;
     padding-top: 50px;
     color: #fff;
 }
-.faq-title{
+
+.faq-title {
     font-size: 40px;
     font-weight: 600;
     margin-top: 0;
     margin-left: 40px;
 }
-#faq ul li{
+
+#faq ul li {
     margin: 10px 0;
     margin-left: 40px;
     list-style-type: none;
@@ -182,15 +208,41 @@ body{
 }
 
 /*---- Graph Section ----*/
-#graph{
+#graph {
     background-image: linear-gradient(to right, #5f1782, #000);
     padding-top: 50px;
     padding-bottom: 50px;
     color: #fff;
 }
-.data-info{
-    margin-top: 0;
-    margin-left: 40px;
+
+#data {
+    display: flex;
+    /* background-color: #fff; */
+}
+
+#info {
+    border: 3px solid red;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: purple;
+    flex: 1;
+    max-width: 50%;
+    margin: 25px;
+    font-weight: 600;
+}
+
+#plot {
+    margin: 25px;
+    /* padding: 25px; */
+    flex: 1;
+}
+
+#summary {
+    border: 3px solid red;
+    background-color: purple;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 25px;
     font-weight: 600;
 }
 

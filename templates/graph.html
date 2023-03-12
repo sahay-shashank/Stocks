@@ -1,150 +1,442 @@
 <html>
-
-<head>
+  <head>
     <title>Stock Tracking Graph</title>
     <script src="https://cdn.plot.ly/plotly-2.18.2.min.js"></script>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
 
-<body onload = "get_graph_details(this)">
+  <body onload="get_graph_details(this)">
     <section id="navbar">
-
-
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='assets/logo.jpg') }}"></a>
-            <!-- Nanbar Toggler -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#banner">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">ABOUT US</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#faq">FAQ</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"
+          ><img src="{{ url_for('static', filename='assets/logo.jpg') }}"
+        /></a>
+        <!-- Nanbar Toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#about">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#faq">FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </section>
-
 
     <section id="search">
-
-
-        <center>
-            <div class="bar">
-                <input class="searchbar" type="text" title="Search" placeholder="Search companies...">
-            </div>
-            <div class="button-small">
-                <h4 class="button-small-title">Period</h4>
-                <input class="button-small" type="radio">1 day</button>
-                <input class="button-small" type="radio">5 days</button>
-                <input class="button-small" type="radio">1 month</button>
-                <input class="button-small" type="radio">3 months</button>
-                <input class="button-small" type="radio">6 months</button>
-                <input class="button-small" type="radio">1 year</button>
-                <br>
-                <input class="button-small" type="radio">2 years</button>
-                <input class="button-small" type="radio">5 years</button>
-                <input class="button-small" type="radio">10 years</button>
-                <input class="button-small" type="radio">Max</button>
-            </div>
-            <div class="button-small">
-                <h4 class="button-small-title">Intervals</h4>
-                <!-- 1 day minutes and hours allowed else only day and more -->
-                <input class="button-small" type="radio">1 minute</button>
-                <input class="button-small" type="radio">2 minutes</button>
-                <input class="button-small" type="radio">5 minutes</button>
-                <input class="button-small" type="radio">15 minutes</button>
-                <input class="button-small" type="radio">30 minutes</button>
-                <input class="button-small" type="radio">1 hour</button>
-                <br>
-                <input class="button-small" type="radio">1 day</button>
-                <input class="button-small" type="radio">5 days</button>
-                <input class="button-small" type="radio">1 week</button>
-                <input class="button-small" type="radio">1 month</button>
-                <input class="button-small" type="radio">3 months</button>
-            </div>
-            <h4 class="button-small-title">Options</h4>
-            <div class="button-small">
-                <input class="button-small" type="radio">Open</button>
-                <input class="button-small" type="radio">Close</button>
-            </div>
-            <div class="buttons">
-                <button class="button" type="button">Search</button>
-                <button class="button" type="button" value="Clear" onclick="fun()">Clear</button>
-            </div>
-        </center>
-
-
+      <center>
+        <div class="bar">
+          <input
+            class="searchbar"
+            type="text"
+            title="Search"
+            id="search_bar"
+            placeholder="Search Companies..."
+            value="{{name}}"
+          />
+        </div>
+        <div class="button-small">
+          <h4 class="button-small-title">Period</h4>
+          <input
+            class="button-small"
+            type="radio"
+            id="1day_period"
+            value="1d"
+            name="period"
+          />1 day
+          <input
+            class="button-small"
+            type="radio"
+            id="5days_period"
+            value="5d"
+            name="period"
+          />5 days
+          <input
+            class="button-small"
+            type="radio"
+            id="1month_period"
+            value="1mo"
+            name="period"
+          />1 month
+          <input
+            class="button-small"
+            type="radio"
+            id="3months_period"
+            value="3mo"
+            name="period"
+          />3 months
+          <input
+            class="button-small"
+            type="radio"
+            id="6months"
+            value="6mo"
+            name="period"
+          />6 months
+          <input
+            class="button-small"
+            type="radio"
+            id="1year"
+            value="1y"
+            name="period"
+          />1 year
+          <br />
+          <input
+            class="button-small"
+            type="radio"
+            id="2years"
+            value="2y"
+            name="period"
+          />2 years
+          <input
+            class="button-small"
+            type="radio"
+            id="5years"
+            value="5y"
+            name="period"
+          />5 years
+          <input
+            class="button-small"
+            type="radio"
+            id="10years"
+            value="10y"
+            name="period"
+          />10 years
+          <input
+            class="button-small"
+            type="radio"
+            id="Max"
+            value="max"
+            name="period"
+          />Max
+        </div>
+        <div class="button-small">
+          <h4 class="button-small-title">Intervals</h4>
+          <!-- 1 day minutes and hours allowed else only day and more -->
+          <input
+            class="button-small"
+            type="radio"
+            id="1min"
+            value="1m"
+            name="interval"
+          />1 minute
+          <input
+            class="button-small"
+            type="radio"
+            id="2min"
+            value="2m"
+            name="interval"
+          />2 minutes
+          <input
+            class="button-small"
+            type="radio"
+            id="5min"
+            value="5m"
+            name="interval"
+          />5 minutes
+          <input
+            class="button-small"
+            type="radio"
+            id="15min"
+            value="15m"
+            name="interval"
+          />15 minutes
+          <input
+            class="button-small"
+            type="radio"
+            id="30min"
+            value="30m"
+            name="interval"
+          />30 minutes
+          <input
+            class="button-small"
+            type="radio"
+            id="1hour"
+            value="1hr"
+            name="interval"
+          />1 hour
+          <br />
+          <input
+            class="button-small"
+            type="radio"
+            id="1day"
+            value="1d"
+            name="interval"
+          />1 day
+          <input
+            class="button-small"
+            type="radio"
+            id="5day"
+            value="5d"
+            name="interval"
+          />5 days
+          <input
+            class="button-small"
+            type="radio"
+            id="1week"
+            value="1wk"
+            name="interval"
+          />1 week
+          <input
+            class="button-small"
+            type="radio"
+            id="1month"
+            value="1mo"
+            name="interval"
+          />1 month
+          <input
+            class="button-small"
+            type="radio"
+            id="3months"
+            value="1mo"
+            name="interval"
+          />3 months
+        </div>
+        <h4 class="button-small-title">Options</h4>
+        <div class="button-small">
+          <input
+            class="button-small"
+            type="radio"
+            id="open"
+            value="open"
+            name="option"
+          />Open
+          <input
+            class="button-small"
+            type="radio"
+            id="close"
+            value="close"
+            name="option"
+          />Close
+        </div>
+        <div class="buttons">
+          <button class="button" type="button" onclick="getsearch()">
+            Search
+          </button>
+        </div>
+      </center>
     </section>
-    <div id="data">
+    <section>
+      <div id="data">
         <div id="info">
-            <h4>Company Name:</h4><div id ="comp_name"></div>
-            <h4>Country:</h4><div id ="comp_count"></div>
-            <h4>Company Website:</h4><div id ="comp_web"></div>
-            <h4>Industry:</h4><div id ="comp_indus"></div>
-            <h4>Company Summary:</h4><div id ="comp_sum"></div>
+          <h4>Company Name:</h4>
+          <div id="comp_name"></div>
+          <h4>Country:</h4>
+          <div id="comp_count"></div>
+          <h4>Company Website:</h4>
+          <div id="comp_web"></div>
+          <h4>Industry:</h4>
+          <div id="comp_indus"></div>
         </div>
         <div id="plot"></div>
-    </div>
+      </div>
+      <div id="summary">
+        <h4>Company Summary:</h4>
+        <div id="comp_sum"></div>
+      </div>
+    </section>
     <script>
-        function get_graph_details(x) {
-            var ticker;
-            var period;
-            var interval;
-            var option;
-            
-            if(x.onload){
-                ticker = "{{ticker_graph}}";
-            period = "1d";
-            interval = "1m";
-            option = "Close";
-            
-            }
-            const data = { ticker, period, interval, option };
-            fetch("/plotgraph", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            })
-              .then((response) => response.json())
-              .then((jsonData) => {
-                if (jsonData["result"] == 0)
-                  document.getElementById("info").innerHTML = "Data Not Found";
-                else {
-                  plot_data = JSON.parse(jsonData["result_plot"]);
-                  profile_data = JSON.parse(jsonData["profile"])[ticker];
-               document.getElementById("comp_name").innerHTML = "{{name}}";
-               document.getElementById("comp_count").innerHTML = profile_data.country;
-               document.getElementById("comp_indus").innerHTML = profile_data.industry;
-               document.getElementById("comp_web").innerHTML = profile_data.website;
-               document.getElementById("comp_sum").innerHTML = profile_data.longBusinessSummary;
-                  Plotly.newPlot("plot", plot_data.data, plot_data.layout);
-                }
-              })
-              // )
-              .catch((error) => console.error("Error sending data:", error));
-          }
+      async function getsearch() {
+        var period;
+        var interval;
+        var option;
+        var company = document.getElementById("search_bar").value;
+        const radioButtons_period = document.querySelectorAll(
+          'input[name="period"]'
+        );
+        await radioButtons_period.forEach((radioButton) => {
+          if (radioButton.checked) period = radioButton.value;
+        });
+        const radioButtons_interval = document.querySelectorAll(
+          'input[name="interval"]'
+        );
+        await radioButtons_interval.forEach((radioButton) => {
+          if (radioButton.checked) interval = radioButton.value;
+        });
+        const radioButtons_option = document.querySelectorAll(
+          'input[name="option"]'
+        );
+        await radioButtons_option.forEach((radioButton) => {
+          if (radioButton.checked) option = radioButton.value;
+        });
+        var company_name = { company: company };
+        fetch("/getticker", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(company_name),
+        })
+          .then((response) => response.json())
+          .then((message) => {
+            window.location.href =
+              "{{url_for('graph')}}" +
+              "?ticker=" +
+              message["ticker"] +
+              "&name=" +
+              company.toUpperCase() +
+              "&interval=" +
+              interval +
+              "&period=" +
+              period +
+              "&option=" +
+              option;
+          })
+          .catch((error) => console.error(error));
+      }
     </script>
-</body>
-
+    <script>
+      function get_graph_details(x) {
+        var ticker = "{{ticker_graph}}";
+        var period = "{{period}}";
+        var interval = "{{interval}}";
+        var option = "{{option}}";
+        const data = { ticker, period, interval, option };
+        fetch("/plotgraph", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((jsonData) => {
+            if (jsonData["result"] == 0)
+              alert(
+                "Data not found. Might be that the company is invalid or is missing some keywords like Inc. or Ltd."
+              );
+            else {
+              plot_data = JSON.parse(jsonData["result_plot"]);
+              profile_data = JSON.parse(jsonData["profile"])[ticker];
+              document.getElementById("comp_name").innerHTML = "{{name}}";
+              document.getElementById("comp_count").innerHTML =
+                profile_data.country;
+              document.getElementById("comp_indus").innerHTML =
+                profile_data.industry;
+              document.getElementById("comp_web").innerHTML =
+                "<a href =" +
+                `"${profile_data.website}"` +
+                ">" +
+                profile_data.website +
+                "</a>";
+              document.getElementById("comp_sum").innerHTML =
+                profile_data.longBusinessSummary;
+              Plotly.newPlot("plot", plot_data.data, plot_data.layout, {
+                responsive: true,
+              });
+            }
+          })
+          // )
+          .catch((error) => console.error("Error sending data:", error));
+      }
+    </script>
+    <script>
+      const radioButtons = document.querySelectorAll('input[name="period"]');
+      const radioButtons_i = document.querySelectorAll(
+        'input[name="interval"]'
+      );
+      radioButtons_i.forEach((radioButton) => {
+        if ("{{interval}}" == radioButton.value) {
+          radioButton.checked = true;
+        }
+      });
+      const radioButtons_o = document.querySelectorAll('input[name="option"]');
+      radioButtons_o.forEach((radioButton) => {
+        if ("{{option}}" == radioButton.value) {
+          radioButton.checked = true;
+        }
+      });
+      radioButtons.forEach((radioButton) => {
+        if ("{{period}}" == radioButton.value) {
+          radioButton.checked = true;
+          if (radioButton.value != "1d") {
+            document.getElementById("1min").disabled = true;
+            document.getElementById("2min").disabled = true;
+            document.getElementById("5min").disabled = true;
+            document.getElementById("15min").disabled = true;
+            document.getElementById("30min").disabled = true;
+            document.getElementById("1hour").disabled = true;
+            document.getElementById("1day").disabled = false;
+            document.getElementById("5day").disabled = false;
+            document.getElementById("1week").disabled = false;
+            document.getElementById("1month").disabled = false;
+            document.getElementById("3months").disabled = false;
+          } else {
+            document.getElementById("1day").disabled = true;
+            document.getElementById("5day").disabled = true;
+            document.getElementById("1week").disabled = true;
+            document.getElementById("1month").disabled = true;
+            document.getElementById("3months").disabled = true;
+            document.getElementById("1min").disabled = false;
+            document.getElementById("2min").disabled = false;
+            document.getElementById("5min").disabled = false;
+            document.getElementById("15min").disabled = false;
+            document.getElementById("30min").disabled = false;
+            document.getElementById("1hour").disabled = false;
+          }
+        }
+        radioButton.addEventListener("change", (event) => {
+          if (event.target.value != "1d") {
+            document.getElementById("1min").disabled = true;
+            document.getElementById("2min").disabled = true;
+            document.getElementById("5min").disabled = true;
+            document.getElementById("15min").disabled = true;
+            document.getElementById("30min").disabled = true;
+            document.getElementById("1hour").disabled = true;
+            document.getElementById("1day").disabled = false;
+            document.getElementById("1day").checked = true;
+            document.getElementById("close").checked = true;
+            document.getElementById("5day").disabled = false;
+            document.getElementById("1week").disabled = false;
+            document.getElementById("1month").disabled = false;
+            document.getElementById("3months").disabled = false;
+          } else {
+            document.getElementById("1day").disabled = true;
+            document.getElementById("5day").disabled = true;
+            document.getElementById("1week").disabled = true;
+            document.getElementById("1month").disabled = true;
+            document.getElementById("3months").disabled = true;
+            document.getElementById("1min").disabled = false;
+            document.getElementById("2min").disabled = false;
+            document.getElementById("5min").disabled = false;
+            document.getElementById("15min").disabled = false;
+            document.getElementById("30min").disabled = false;
+            document.getElementById("1hour").disabled = false;
+            document.getElementById("1min").checked = true;
+            document.getElementById("close").checked = true;
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

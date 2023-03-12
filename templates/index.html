@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#banner">HOME</a>
+              <a class="nav-link" href="/">HOME</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">ABOUT US</a>
@@ -188,8 +188,12 @@
       var scroll = new SmoothScroll('a[href*="#"]');
     </script>
     <script>
-      async function getsearch() {
+      function getsearch() {
         var company = document.getElementById("search_bar").value;
+        if (company == "") {
+          alert("Please enter a valid company name.");
+          return 0;
+        }
         var company_name = { company: company };
         fetch("/getticker", {
           method: "POST",
@@ -198,7 +202,14 @@
         })
           .then((response) => response.json())
           .then((message) => {
-              window.location.href = "{{url_for('graph')}}" + "?ticker="+ message["ticker"] +"&name=" + company.toUpperCase();
+            if (message["ticker"] != null)
+              window.location.href =
+                "{{url_for('graph')}}" +
+                "?ticker=" +
+                message["ticker"] +
+                "&name=" +
+                company.toUpperCase() +
+                "&interval=1m&period=1d&option=close";
           })
           .catch((error) => console.error(error));
       }

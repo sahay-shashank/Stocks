@@ -34,6 +34,7 @@ def plot():
         yaxis=go.layout.YAxis(
             title=company.summary_detail[result['ticker']]['currency'])  # type: ignore
     ))
+    # fig.update_yaxes(automargin=True)
     # plots in a graph
     plot_json = fig.to_json()
     print()
@@ -54,7 +55,10 @@ def getticker():
 def graph():
     ticker = request.args.get("ticker")
     name = request.args.get('name')
-    return render_template('graph.html',ticker_graph = ticker, name = name)
+    period = request.args.get('period')
+    interval = request.args.get('interval')
+    option = request.args.get('option')
+    return render_template('graph.html',ticker_graph = ticker, name = name, period=period,interval=interval,option=option)
 
 if __name__ == '__main__':
     app.run(debug=True)
