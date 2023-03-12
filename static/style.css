@@ -4,7 +4,7 @@
 }
 body{
     font-family: 'poppins', sans-serif;
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-image: linear-gradient(275deg, #434343 0%, black 100%);
 }
 #nav-bar{
     position: sticky;
@@ -66,7 +66,6 @@ body{
 .bar {
     margin-top: 40px;
     width: 600px;
-    
     border: 1px #c8c8c8;
 }
 /* .bar:hover {
@@ -84,6 +83,14 @@ body{
     font-size: 20px;
     outline: none;
     border-radius: 80px;
+}
+.button-small{
+    color: #fff;
+    margin: 5px;
+}
+.button-small-title{
+    color: #fff;
+    margin: 20px;
 }
 .searchbar:focus-within{
     box-shadow: 1px 1px 8px 1px #707070;
@@ -172,6 +179,19 @@ body{
     margin-left: 40px;
     list-style-type: none;
     cursor: pointer;
+}
+
+/*---- Graph Section ----*/
+#graph{
+    background-image: linear-gradient(to right, #5f1782, #000);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #fff;
+}
+.data-info{
+    margin-top: 0;
+    margin-left: 40px;
+    font-weight: 600;
 }
 
 /*---- Smooth Scroll JS ----*/

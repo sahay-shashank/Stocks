@@ -48,47 +48,53 @@
 
     <section id="search">
 
+
         <center>
             <div class="bar">
                 <input class="searchbar" type="text" title="Search" placeholder="Search companies...">
             </div>
-            <h4>Period</h4>
             <div class="button-small">
-                <button class="button-small" type="button">1 day</button>
-                <button class="button-small" type="button">5 days</button>
-                <button class="button-small" type="button">1 month</button>
-                <button class="button-small" type="button">3 months</button>
-                <button class="button-small" type="button">6 months</button>
-                <button class="button-small" type="button">1 year</button>
-                <button class="button-small" type="button">2 years</button>
-                <button class="button-small" type="button">5 years</button>
-                <button class="button-small" type="button">10 years</button>
-                <button class="button-small" type="button">Max</button>
+                <h4 class="button-small-title">Period</h4>
+                <input class="button-small" type="radio">1 day</button>
+                <input class="button-small" type="radio">5 days</button>
+                <input class="button-small" type="radio">1 month</button>
+                <input class="button-small" type="radio">3 months</button>
+                <input class="button-small" type="radio">6 months</button>
+                <input class="button-small" type="radio">1 year</button>
+                <br>
+                <input class="button-small" type="radio">2 years</button>
+                <input class="button-small" type="radio">5 years</button>
+                <input class="button-small" type="radio">10 years</button>
+                <input class="button-small" type="radio">Max</button>
             </div>
-            <h4>Intervals</h4>
             <div class="button-small">
+                <h4 class="button-small-title">Intervals</h4>
                 <!-- 1 day minutes and hours allowed else only day and more -->
                 <input class="button-small" type="radio">1 minute</button>
-                <button class="button-small" type="button">2 minutes</button>
-                <button class="button-small" type="button">5 minutes</button>
-                <button class="button-small" type="button">15 minutes</button>
-                <button class="button-small" type="button">30 minutes</button>
-                <button class="button-small" type="button">1 hour</button>
-                <button class="button-small" type="button">1 day</button>
-                <button class="button-small" type="button">5 days</button>
-                <button class="button-small" type="button">1 week</button>
-                <button class="button-small" type="button">1 month</button>
-                <button class="button-small" type="button">3 months</button>
+                <input class="button-small" type="radio">2 minutes</button>
+                <input class="button-small" type="radio">5 minutes</button>
+                <input class="button-small" type="radio">15 minutes</button>
+                <input class="button-small" type="radio">30 minutes</button>
+                <input class="button-small" type="radio">1 hour</button>
+                <br>
+                <input class="button-small" type="radio">1 day</button>
+                <input class="button-small" type="radio">5 days</button>
+                <input class="button-small" type="radio">1 week</button>
+                <input class="button-small" type="radio">1 month</button>
+                <input class="button-small" type="radio">3 months</button>
             </div>
-            <h4>Options</h4>
+            <h4 class="button-small-title">Options</h4>
             <div class="button-small">
-                <button class="button-small" type="button">Open</button>
-                <button class="button-small" type="button">Close</button>
+                <input class="button-small" type="radio">Open</button>
+                <input class="button-small" type="radio">Close</button>
             </div>
             <div class="buttons">
                 <button class="button" type="button">Search</button>
+                <button class="button" type="button" value="Clear" onclick="fun()">Clear</button>
             </div>
         </center>
+
+
     </section>
     <div id="data">
         <div id="info">
